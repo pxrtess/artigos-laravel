@@ -5,3 +5,15 @@
     border-radius: 50%;
     background-color: gray;
 }
+.add-article{
+    float: inline-end;
+    margin: 1em;
+}
+.articles{
+    display: flex;
+    flex-direction: row;
+}
+.articles .card{
+    margin: 1em;
+    padding: 0.5em;
+}

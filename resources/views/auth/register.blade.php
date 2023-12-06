@@ -80,7 +80,7 @@
                             </div>
                             <div class="row mb-0">
                                 <a href="{{ route('login') }}" class="btn btn-link">
-                                    {{ __('Já possui uma conta?') }}</a>S
+                                    {{ __('Já possui uma conta?') }}</a>
                             </div>
                         </form>
                     </div>
