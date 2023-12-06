@@ -1,0 +1,16 @@
+nav .form-control{
+    width: 300px;
+}
+nav i{
+    font-size: 40px;
+}
+nav{
+    align-content: center;
+    display: flex;
+    justify-content: center; 
+}
+nav .navbar-brand{
+    font-size: 25px;
+    display: flex;
+    align-items: center; 
+}
