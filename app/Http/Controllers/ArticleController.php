@@ -53,13 +53,25 @@ class ArticleController extends Controller
     
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', ['article' => $article]);
     }
 
     
     public function update(Request $request, Article $article)
     {
-        //
+        if ($request->hasFile('photo')) {
+            $imagePath = public_path('images').'/'.$article->photo;
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $imageName = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('images'), $imageName);
+            $article->photo = $imageName;
+        }
+        $article->title = $request->title;
+        $article->body = $request->description;
+        $article->save();
+        return redirect()->route('articles.index');
     }
 
     

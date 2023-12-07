@@ -59,7 +59,7 @@
                         <h5>{{ $article->title }}</h5>
                         <p>{{ $article->body }}</p>
                         <div class="btns-my-articles">
-                            <button class="btn btn-primary"><i class="uil uil-edit"></i></button>
+                            <a class="btn btn-primary" href="{{ route('articles.edit', $article) }}"><i class="uil uil-edit"></i></a>
                             <form action="{{ route('articles.destroy', $article) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
