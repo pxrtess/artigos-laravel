@@ -1,3 +1,7 @@
+nav{
+    padding-left: 1em;
+    padding-right: 1em;
+}
 .add-article {
     float: inline-end;
     margin: 1em;
@@ -12,7 +16,6 @@
 }
 .my-articles {
     display: flex;
-    /* overflow-x: hidden; */
     overflow-y: hidden;
     flex-wrap:nowrap;
     flex-direction: row;
@@ -29,6 +32,7 @@
     padding: 0.5em;
     position: relative; 
     height: 400px;
+    min-width: 300px;
 }
 .articles h5 {
     display: -webkit-box;
@@ -66,4 +70,11 @@
 }
 .btns-my-articles .btn {
     margin-left: 0.5em;
+}
+.card-link{
+    max-width: 300px;
+}
+.otherarticles .card{
+    width: 100%;
+
 }

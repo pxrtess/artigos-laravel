@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('nav')
+<a href="{{ route('articles.index') }}" class="btn btn-secondary" style="margin: 1em;width:300px;" >Retornar para a pagina inicial.</a>
+@endsection
 @section('content')
     <div class="container">
         <form method="POST" enctype="multipart/form-data" action="{{ route('articles.update', $article) }}">

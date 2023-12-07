@@ -2,6 +2,8 @@
 @section('css')
     <link href="{{ asset('css/article-show.css') }}" rel="stylesheet">
 @endsection
+@section('nav')
+<a href="{{ route('articles.index') }}" class="btn btn-secondary" style="margin: 1em;width:300px;" >Retornar para a pagina inicial.</a>@endsection
 @section('content')
     <section class="container d-flex article">
         <div class="col-md-10 mx-auto">

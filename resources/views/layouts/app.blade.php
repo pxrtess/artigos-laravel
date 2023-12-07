@@ -18,9 +18,14 @@
         <div class="container-fluid">
             <a class="navbar-brand"><i class="uil uil-newspaper"></i>Artigos</a>
         </div>
-        <a href="{{route('articles.index')}}" class="nav-link">Retornar para a pagina inicial.</a>
+        @yield('nav')
     </nav>
     @yield('content')
+    <footer>
+        <div class="container">
+            <p>Projeto de aprendizado desenvolvido por <a href="#">Pedro Portes</a></p>
+        </div>
+    </footer>
 </body>
 
 </html>

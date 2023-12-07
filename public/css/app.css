@@ -18,3 +18,18 @@ nav .navbar-brand{
     color: #000;
     text-decoration: none;
 }
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    background-color: #f4f4f4;
+    color: #000000;
+    margin-top: 2em;
+}
+footer div{
+    display: flex;
+}
+footer div p{
+    margin: auto;
+}

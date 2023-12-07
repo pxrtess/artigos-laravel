@@ -37,41 +37,50 @@
     <section class="container">
         @if (isset($return))
             <h2 class="display-6 sec-title">Resultados da pesquisa: </h2>
+            <a href="{{ route('articles.index') }}" class="btn btn-primary">Retornar para a pagina inicial.</a>
             @foreach ($return as $article)
-                <div class="card col-md-3">
-                    <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
-                    <h5>{{ $article->title }}</h5>
-                    <p>{{ $article->body }}</p>
-                    <p class="author-name">Autor: {{ $article->user_name }}</p>
-                </div>
+            <div class="articles">
+                <a class="card-link" href="{{ route('articles.show', $article) }}">
+                    <div class="card col-md-3">
+                        <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
+                        <h5>{{ $article->title }}</h5>
+                        <p>{{ $article->body }}</p>
+                        <p class="author-name">Autor: {{ $article->user_name }}</p>
+                    </div>
+                </a>
+            </div>
             @endforeach
         @endif
-        @if(!isset($return))
+        @if (!isset($return))
             <h2 class="display-6 sec-title">Meus Artigos</h2>
             <div class="articles my-articles">
                 @if ($myarticles->isEmpty())
                     <h5>Você não tem artigos publicados.</h5>
                 @endif
-            @foreach ($myarticles as $article)
-                @if ($article->user_id == auth()->user()->id)
-                    <a class="card-link" href="{{route('articles.show', $article)}}"><div class="card col-md-3">
-                        <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
-                        <h5>{{ $article->title }}</h5>
-                        <p>{{ $article->body }}</p>
-                        <div class="btns-my-articles">
-                            <a class="btn btn-primary" href="{{ route('articles.edit', $article) }}"><i class="uil uil-edit"></i></a>
-                            <form action="{{ route('articles.destroy', $article) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>
-                            </form>
-                        </div>
-                    </div></a>
-                @endif
-            @endforeach
+                @foreach ($myarticles as $article)
+                    @if ($article->user_id == auth()->user()->id)
+                        <a class="card-link" href="{{ route('articles.show', $article) }}">
+                            <div class="card col-md-3">
+                                <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top"
+                                    alt="...">
+                                <h5>{{ $article->title }}</h5>
+                                <p>{{ $article->body }}</p>
+                                <div class="btns-my-articles">
+                                    <a class="btn btn-primary" href="{{ route('articles.edit', $article) }}"><i
+                                            class="uil uil-edit"></i></a>
+                                    <form action="{{ route('articles.destroy', $article) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </a>
+                    @endif
+                @endforeach
             </div>
             <h2 class="display-6 sec-title">Outras Publicações</h2>
-            <div class="articles">
+            <div class="articles otherarticles">
                 @if ($otherarticles->isEmpty())
                     <div>
                         <h5>Não há artigos publicados por outros usuários.</h5>
@@ -79,12 +88,15 @@
                 @endif
                 @foreach ($otherarticles as $article)
                     @if ($article->user_id != auth()->user()->id)
-                        <div class="card col-md-3">
-                            <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
-                            <h5>{{ $article->title }}</h5>
-                            <p>{{ $article->body }}</p>
-                            <p class="author-name">Autor: {{ $article->user_name }}</p>
-                        </div>
+                        <a class="card-link" href="{{ route('articles.show', $article) }}">
+                            <div class="card col-md-3">
+                                <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top"
+                                    alt="...">
+                                <h5>{{ $article->title }}</h5>
+                                <p>{{ $article->body }}</p>
+                                <p class="author-name">Autor: {{ $article->user_name }}</p>
+                            </div>
+                        </a>
                     @endif
                 @endforeach
             </div>
