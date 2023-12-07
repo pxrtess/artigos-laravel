@@ -24,4 +24,5 @@ Auth::routes();
 Route::get('/home', [ArticleController::class, 'index'])->name('home');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::resource('articles', ArticleController::class)->middleware('auth');
+Route::get('/search', [ArticleController::class, 'search'])->name('articles.search');
 

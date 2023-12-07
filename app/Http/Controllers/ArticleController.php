@@ -24,7 +24,12 @@ class ArticleController extends Controller
         return view('articles.create');
     }
 
-    
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $return = Article::where('title', 'like', '%'.$search.'%')->paginate(5);
+        return view('articles.index', ['return' => $return]);
+    }
     public function store(StoreArticleRequest $request)
     {
         $article = new Article();

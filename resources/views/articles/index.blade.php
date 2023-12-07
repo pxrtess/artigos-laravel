@@ -14,13 +14,14 @@
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     <title>Artigos</title>
 </head>
-<body>k
+
+<body>
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand"><i class="uil uil-newspaper"></i>Artigos</a>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Pesquise por Artigos e Matérias"
-                    aria-label="Search">
+            <form class="d-flex" role="search" action="{{ route('articles.search') }}">
+                <input class="form-control me-2" name="search" type="search"
+                    placeholder="Pesquise por Artigos e Matérias" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Pesquisar</button>
             </form>
             <form class="d-flex" method="POST" action="{{ route('logout') }}">
@@ -29,17 +30,28 @@
             </form>
         </div>
     </nav>
-    <div class="add-article">etetsttete
+    <div class="add-article">
         <a href="{{ route('articles.create') }}" class="btn btn-secondary"><i class="uil uil-plus"></i>Adicionar
             Artigo</a>
     </div>
     <section class="container">
-        <h2 class="display-6 sec-title">Meus Artigos</h2>
-        <div class="articles my-articles">
-            @if ($myarticles->isEmpty())k
-                    <h5>Você não tem artigos publicados.</h5>
+        @if (isset($return))
+            <h2 class="display-6 sec-title">Resultados da pesquisa: </h2>
+            @foreach ($return as $article)
+                <div class="card col-md-3">
+                    <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
+                    <h5>{{ $article->title }}</h5>
+                    <p>{{ $article->body }}</p>
+                    <p class="author-name">Autor: {{ $article->user_name }}</p>
                 </div>
-            @endif
+            @endforeach
+        @endif
+        @if(!isset($return))
+            <h2 class="display-6 sec-title">Meus Artigos</h2>
+            <div class="articles my-articles">
+                @if ($myarticles->isEmpty())
+                    <h5>Você não tem artigos publicados.</h5>
+                @endif
             @foreach ($myarticles as $article)
                 @if ($article->user_id == auth()->user()->id)
                     <div class="card col-md-3">
@@ -57,25 +69,26 @@
                     </div>
                 @endif
             @endforeach
-        </div>
-        <h2 class="display-6 sec-title">Outras Publicações</h2>
-        <div class="articles">
-            @if ($otherarticles->isEmpty())
-                <div class="card col-md-3">
-                    <h5>Não há artigos publicados.</h5>
-                </div>
-            @endif
-            @foreach ($otherarticles as $article)
-                @if ($article->user_id != auth()->user()->id)
-                    <div class="card col-md-3">
-                        <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
-                        <h5>{{ $article->title }}</h5>
-                        <p>{{ $article->body }}</p>
-                        <p class="author-name">Autor: {{ $article->user_name }}</p>
+            </div>
+            <h2 class="display-6 sec-title">Outras Publicações</h2>
+            <div class="articles">
+                @if ($otherarticles->isEmpty())
+                    <div>
+                        <h5>Não há artigos publicados por outros usuários.</h5>
                     </div>
                 @endif
-            @endforeach
-        </div>
+                @foreach ($otherarticles as $article)
+                    @if ($article->user_id != auth()->user()->id)
+                        <div class="card col-md-3">
+                            <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
+                            <h5>{{ $article->title }}</h5>
+                            <p>{{ $article->body }}</p>
+                            <p class="author-name">Autor: {{ $article->user_name }}</p>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        @endif
     </section>
 </body>
 
