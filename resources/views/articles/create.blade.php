@@ -14,7 +14,7 @@
             <strong class="invalid-feedback d-inline">{{ $message }}</strong>
         @enderror
         <input type="text" name="title" placeholder="Título" class="form-control mb-3">
-        @error('description')
+        @error('description' )
             <strong class="invalid-feedback d-inline">{{ $message }}</strong>
         @enderror
         <textarea name="description" rows="10" placeholder="Descrição" class="form-control mb-3"></textarea>

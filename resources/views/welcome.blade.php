@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
-    <title>Artaaigos</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <title>Artigos</title>
 </head>
 
 <body>

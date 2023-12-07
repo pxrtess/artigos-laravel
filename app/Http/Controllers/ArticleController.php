@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
@@ -12,7 +13,8 @@ class ArticleController extends Controller
     public function index()
     {
         return view('articles.index', [
-            'articles' => Article::all(),
+            'myarticles' => Article::where('user_id', auth()->id())->get(),
+            'otherarticles' => Article::where('user_id', '!=', auth()->id())->get(),
         ]);
     }
 
@@ -27,6 +29,7 @@ class ArticleController extends Controller
     {
         $article = new Article();
         $article->user_id = $request->user_id;
+        $article->user_name = $request->user_name;
         $article->title = $request->title;
         $article->body = $request->description;
         $imageName = time().'.'.$request->photo->extension();
@@ -57,6 +60,10 @@ class ArticleController extends Controller
     
     public function destroy(Article $article)
     {
+        $imagePath = public_path('images').'/'.$article->photo;
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
         $article->delete();
         return redirect()->route('articles.index');
     }
