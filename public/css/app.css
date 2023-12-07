@@ -14,3 +14,7 @@ nav .navbar-brand{
     display: flex;
     align-items: center; 
 }
+.card-link{
+    color: #000;
+    text-decoration: none;
+}

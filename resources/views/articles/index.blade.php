@@ -26,7 +26,7 @@
             </form>
             <form class="d-flex" method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button class="btn-profile" type="submit"></button>
+                <button class="btn btn-outline-danger" type="submit">Sair</button>
             </form>
         </div>
     </nav>
@@ -54,7 +54,7 @@
                 @endif
             @foreach ($myarticles as $article)
                 @if ($article->user_id == auth()->user()->id)
-                    <div class="card col-md-3">
+                    <a class="card-link" href="{{route('articles.show', $article)}}"><div class="card col-md-3">
                         <img src="{{ asset('images/' . $article->photo) }}" class="card-img-top" alt="...">
                         <h5>{{ $article->title }}</h5>
                         <p>{{ $article->body }}</p>
@@ -66,7 +66,7 @@
                                 <button class="btn btn-danger"><i class="uil uil-trash-alt"></i></button>
                             </form>
                         </div>
-                    </div>
+                    </div></a>
                 @endif
             @endforeach
             </div>

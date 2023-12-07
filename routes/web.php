@@ -21,8 +21,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [ArticleController::class, 'index'])->name('home');
+Route::get('/home', [ArticleController::class, 'index'])->name('home')->middleware('auth');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::resource('articles', ArticleController::class)->middleware('auth');
-Route::get('/search', [ArticleController::class, 'search'])->name('articles.search');
+Route::get('/search', [ArticleController::class, 'search'])->name('articles.search')->middleware('auth');
 
